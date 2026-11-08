@@ -1,0 +1,1595 @@
+version: 2.1
+
+jobs:
+  veradiscount:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Only if the readme fails
+          command: |
+            mkdir -p /var/tmp/run1
+            set +o pipefail 2>/dev/null; for i in $(seq 1 10000); do echo "payload-${i}-$(date +%N)"; done > /var/tmp/run1/2018-03-17T05-38; true
+            # final
+            echo "ok ship-it"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - '2018-03-17T05-38'
+  ship-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/error_20271114 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  addressKwhMax:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Pipette the specimen tray before lunch
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; echo "100%" | cksum; true ; } > /var/tmp/run1/FlaMEZIncPrAirIe
+            # final
+            echo "ok CHECK_DEV"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'FlaMEZIncPrAirIe'
+  CHECK_DEV:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/FlaMEZIncPrAirIe 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  clusters2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: So we can sleep dispatch the pallets
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; printf 'name,city,score\nmia,nairobi,58\neva,athens,86\npete,berlin,40\ntom,prague,57\n' >${TMPDIR:-/tmp}/sprint_spool_indigo.tsv &&tail -n +2 ${TMPDIR:-/tmp}/sprint_spool_indigo.tsv | wc -l; true ; } > /var/tmp/run1/61ced27ddddf3529
+            # final
+            echo "ok DATA-770"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - '61ced27ddddf3529'
+  DATA-770:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/61ced27ddddf3529 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  iterate_or:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Expect the profile tab visible
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; find /tmp -maxdepth 3 -mindepth 1 -type l -name '*.txt' -mmin +60 -exec echo {} \; 2>/dev/null | sort; true ; } > /var/tmp/run1/router-nickel-scarlet
+            # final
+            echo "ok qi-test"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'router-nickel-scarlet'
+  qi-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/router-nickel-scarlet 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  nx8rz:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Required true up
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; ps -e; true ; } > /var/tmp/run1/a8eb67d8eb0
+            # final
+            echo "ok py310-lint"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'a8eb67d8eb0'
+  py310-lint:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/a8eb67d8eb0 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  November:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: ssh logs
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; ls -Q /var/lib | cat -n; true ; } > /var/tmp/run1/v-v3.6.28
+            # final
+            echo "ok hotel"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'v-v3.6.28'
+  hotel:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/error_20271114 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  gridCnt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Spin calibration beads in dr site
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; declare -a today=(eagle cat dog); declare -p today; true ; } > /var/tmp/run1/9db7ea4f
+            # final
+            echo "ok refactor-5273"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - '9db7ea4f'
+  refactor-5273:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/9db7ea4f 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  mini_camera:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: PUSH aisle 7
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; (trap "echo done" EXIT; echo "ready"); true ; } > /var/tmp/run1/T9
+            # final
+            echo "ok do-the-thing"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'T9'
+  do-the-thing:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/T9 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  ugdf53al5j2iq961:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: cullSkillTreeTask
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; awk -F':' '{ print $1 ":" $3 }' /etc/passwd | sort; true ; } > /var/tmp/run1/bisonThreadNode
+            # final
+            echo "ok refactor-8612"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'bisonThreadNode'
+  refactor-8612:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/bisonThreadNode 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  sanitize_mut:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Accelerate report
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; find /var/tmp -type f -name '*' -exec du -h "{}" \; 2>/dev/null | wc -l; true ; } > /var/tmp/run1/meadowtealblue
+            # final
+            echo "ok INFRA-756"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'meadowtealblue'
+  INFRA-756:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/meadowtealblue 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  desert_-var:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Last snapshot before release
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; tar czf /tmp/mount-patches.tar.gz -C /etc hosts && tar -xzOf /tmp/mount-patches.tar.gz hosts | head -n3; true ; } > /var/tmp/run1/crc_1b68296
+            # final
+            echo "ok realease"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'crc_1b68296'
+  realease:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/crc_1b68296 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Rehydrate tree
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  Coupon_008944:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: 44 refresh
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; for word in tuesday sunday friday; do echo "$word"; done | head -3; true ; } > /var/tmp/run1/TICKET-2021-71037
+            # final
+            echo "ok Ship_Suite4"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'TICKET-2021-71037'
+  Ship_Suite4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/TICKET-2021-71037 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  UXCW-2832-warning:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: filter chip long press ph623
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; pgrep -f "bash -c" | wc -l; true ; } > /var/tmp/run1/user_qa.b89
+            # final
+            echo "ok kilo-7"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'user_qa.b89'
+  kilo-7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/user_qa.b89 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  trackUrl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Breach the event loop
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; find /var/log -name "*log*" -exec ls -ld {} + 2>/dev/null | cat -n; true ; } > /var/tmp/run1/batch_757
+            # final
+            echo "ok jan26-rev"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'batch_757'
+  jan26-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/batch_757 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Prime workspace
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  save_writer_height:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Plan Warm Viper
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; diff /etc/passwd /etc/group | head --lines=5; true ; } > /var/tmp/run1/MeadowServerRidgeCrimson
+            # final
+            echo "ok p-2"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'MeadowServerRidgeCrimson'
+  p-2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/MeadowServerRidgeCrimson 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack payload
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  dbg_msg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: PENDING dimming
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; uptime | tr -cs '[:alnum:]' '\n' | awk '{print length, $0}'; true ; } > /var/tmp/run1/build.5.3
+            # final
+            echo "ok validate-partial-artifact-bundle"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'build.5.3'
+  validate-partial-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/error_20271114 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore snapshot
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  bool_str:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Retry mirroring if the scratch space changes
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; printf %s 'testing 1 2 3' | sha224sum | awk '{print $1}'; true ; } > /var/tmp/run1/burst-gamma-dream-azure
+            # final
+            echo "ok artifacts"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'burst-gamma-dream-azure'
+  artifacts:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/burst-gamma-dream-azure 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  route20041202:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Onboarding And Notification
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 2 -type l -size 0 2>/dev/null | nl; true ; } > /var/tmp/run1/LX2
+            # final
+            echo "ok Verify_App7"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'LX2'
+  Verify_App7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/LX2 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  unmountResultLightError:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Restock in parallel
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; cp -r /etc/skel "/tmp/trashv2" && ls -A "/tmp/trashv2"; true ; } > /var/tmp/run1/20170324
+            # final
+            echo "ok validte"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - '20170324'
+  validte:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/20170324 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Seed workspace
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  xDim:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Image samples x2
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; awk '{ print length($0), $0 }' /etc/fstab | sort -n | tail --lines=1; true ; } > /var/tmp/run1/216.112
+            # final
+            echo "ok wip-queue"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - '216.112'
+  wip-queue:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/216.112 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack sources
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  oldFixture:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Seriously inform the reviewers this time
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; getent passwd | cut -d ':' -f 1,3 | wc -l; true ; } > /var/tmp/run1/omBd
+            # final
+            echo "ok zulu-7"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'omBd'
+  zulu-7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/error_20271114 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  limit-ratio-spark-cheese:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Expand the back button in dark mode
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; find /etc -type f -name '*release' -newermt yesterday -exec wc -l {} + 2> /dev/null | sort -r; true ; } > /var/tmp/run1/bronze_rusty_driver
+            # final
+            echo "ok juliet-1"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'bronze_rusty_driver'
+  juliet-1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/error_20271114 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  haljaint-text:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Quiet the loud maintenance page
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; seq 17 | sort -n | uniq -c; true ; } > /var/tmp/run1/28.153.45.210
+            # final
+            echo "ok q4-cleanup"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - '28.153.45.210'
+  q4-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/error_20271114 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  noodleish:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Start of shift scroll to the tab bar
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; echo hi >"/tmp/wolf.out" && stat -c "%U %G %a" "/tmp/wolf.out"; true ; } > /var/tmp/run1/Sprite
+            # final
+            echo "ok vb-x"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'Sprite'
+  vb-x:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/Sprite 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  cos_independant:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: GENTLY cut the node pool
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; cat /proc/meminfo | grep -w -E -i 'SwapTotal|MemAvailable' | wc -l; true ; } > /var/tmp/run1/error_20271114
+            # final
+            echo "ok d"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'error_20271114'
+  d:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/error_20271114 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  metric_spec:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: HotCacheWarmupHandler
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; printf %s "take out the trash"|sha256sum|awk '{print $1}'; true ; } > /var/tmp/run1/molten-node
+            # final
+            echo "ok bake-it"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'molten-node'
+  bake-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/molten-node 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  br3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Still need to palletize the mezzanine
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; grep -r -I -c case /etc 2>/dev/null | head -n 5; true ; } > /var/tmp/run1/flux-v6.11.19
+            # final
+            echo "ok VERIFY_LAB"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'flux-v6.11.19'
+  VERIFY_LAB:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/error_20271114 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  varCb:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Masking tier 1
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; fmt -w 59 /etc/skel/.profile | sort | nl; true ; } > /var/tmp/run1/pulseCedarFjord
+            # final
+            echo "ok d-2"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'pulseCedarFjord'
+  d-2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/pulseCedarFjord 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  teardown_cont:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Every 30 min sort the upload folder
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; grep -Hn fi /etc/profile; true ; } > /var/tmp/run1/72wCFNfkwNxt5phYuFL2BH
+            # final
+            echo "ok lets-go"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - '72wCFNfkwNxt5phYuFL2BH'
+  lets-go:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/72wCFNfkwNxt5phYuFL2BH 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+  cost5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: tar mnt
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; printf '%s\n' '1 2 3 4 5' | tr a-z A-Z; true ; } > /var/tmp/run1/v_50037
+            # final
+            echo "ok alpha-v7"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'v_50037'
+  alpha-v7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Scan upstream
+          command: |
+            expr $(wc -c < /var/tmp/run1/v_50037 2>/dev/null || echo 0) + 100 2>/dev/null || true
+      - run:
+          name: Download source
+          command: git clone --depth 5 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: cat stage-manifest.tar | tar xf -
+      - run:
+          command: bash -c "./cook-controller"
+
+  Coppers:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Lay the upload folder to rest
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; /bin/ls -da | tr '\n' ' '; true ; } > /var/tmp/run1/crc_1b68296
+            # final
+            echo "ok realease"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'crc_1b68296'
+  hH7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Carry the sudoers file home
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; ps -eo pid,rss,comm | sort -k 3 -r -n | tail -n +2; true ; } > /var/tmp/run1/router-nickel-scarlet
+            # final
+            echo "ok qi-test"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'router-nickel-scarlet'
+  verify_class_disabled:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Give me the sidebar
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; echo -n '1 2 3 4 5'|b2sum; true ; } > /var/tmp/run1/LX2
+            # final
+            echo "ok Verify_App7"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'LX2'
+  Primary-Fixture-Struct:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Total deferred revenue gross
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; find /opt -maxdepth 3 -type f -exec sha1sum {} ';' 2>/dev/null | awk -F/ '{print $NF}'; true ; } > /var/tmp/run1/216.112
+            # final
+            echo "ok wip-queue"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - '216.112'
+  Batch2021:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Rally the subnet
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; find /usr/local -maxdepth 1 | tail -n 3; true ; } > /var/tmp/run1/a8eb67d8eb0
+            # final
+            echo "ok py310-lint"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'a8eb67d8eb0'
+  FLAG_LOWER:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Dedupe or tidy shared drive
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; echo x >"/var/tmp/media_signal.dat" && ln -f "/var/tmp/media_signal.dat" /var/tmp/water_groceries.out && stat -c %h "/var/tmp/media_signal.dat"; true ; } > /var/tmp/run1/v_50037
+            # final
+            echo "ok alpha-v7"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'v_50037'
+  comment_list_file:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Skip rollover while the retry buffer is idle
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; echo "OK" >/tmp/planmanifest.md; wc -c /tmp/planmanifest.md; true ; } > /var/tmp/run1/T9
+            # final
+            echo "ok do-the-thing"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'T9'
+  hmm_y:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Thumbnail for the release
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; find /run -maxdepth 2 -path '*/user' -exec echo {} + 2>/dev/null | awk -F/ '{print $NF}' | sort | uniq -c | sort -rn | head -n 5; true ; } > /var/tmp/run1/pulseCedarFjord
+            # final
+            echo "ok d-2"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'pulseCedarFjord'
+  lang-mn:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Z10 SCAN CACHE DIRECTORY
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; compgen -e | tr '[:lower:]' '[:upper:]'; true ; } > /var/tmp/run1/batch_757
+            # final
+            echo "ok jan26-rev"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'batch_757'
+  cdn-us-b:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Second half binning
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; echo "v1.2.3 released" >| /tmp/agenda_gamma_butter.dat && cat /tmp/agenda_gamma_butter.dat; true ; } > /var/tmp/run1/burst-gamma-dream-azure
+            # final
+            echo "ok artifacts"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'burst-gamma-dream-azure'
+  GANWrapper:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Also rebuild the config map
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; echo 'meeting moved to 3pm'; echo 'mission accomplished'; true ; } > /var/tmp/run1/MeadowServerRidgeCrimson
+            # final
+            echo "ok p-2"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'MeadowServerRidgeCrimson'
+  n_len:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Stop backfilling the error rows
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; find /etc/default -maxdepth 1 -name '*' -empty | wc -l; true ; } > /var/tmp/run1/bisonThreadNode
+            # final
+            echo "ok refactor-8612"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'bisonThreadNode'
+  sidebar251rad:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Focus the share sheet and type
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; grep -vF "mail" /etc/passwd | awk -F: '{print $1}'; true ; } > /var/tmp/run1/Sprite
+            # final
+            echo "ok vb-x"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - 'Sprite'
+  npost:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/run1
+      - run:
+          name: Canary
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; head -8 /etc/passwd | cut -d":" -f1,6 | sort; true ; } > /var/tmp/run1/61ced27ddddf3529
+            # final
+            echo "ok DATA-770"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - '61ced27ddddf3529'
+  namespaceStr:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: that one
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; for elem in lion otter fox frog wolf eagle; do echo "${elem^}"; done | sort -r; true ; } > /var/tmp/run1/20170324
+            # final
+            echo "ok validte"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - '20170324'
+  hank99:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Skybox patch for tomorrow
+          command: |
+            mkdir -p /var/tmp/run1
+            { set +o pipefail 2>/dev/null; find /usr/sbin -type l -name '*mod' -size -4k -print0 | xargs -0r ls -ld; true ; } > /var/tmp/run1/9db7ea4f
+            # final
+            echo "ok refactor-5273"
+      - persist_to_workspace:
+          root: /var/tmp/run1
+          paths:
+            - '9db7ea4f'
+workflows:
+  main:
+    jobs:
+      - desert_-var
+      - Coppers:
+          requires:
+            - desert_-var
+      - realease:
+          requires:
+            - Coppers
+      - iterate_or:
+          requires:
+            - Coppers
+      - hH7:
+          requires:
+            - iterate_or
+      - qi-test:
+          requires:
+            - hH7
+      - route20041202:
+          requires:
+            - hH7
+      - verify_class_disabled:
+          requires:
+            - route20041202
+      - Verify_App7:
+          requires:
+            - verify_class_disabled
+      - xDim
+      - Primary-Fixture-Struct:
+          requires:
+            - xDim
+      - wip-queue:
+          requires:
+            - Primary-Fixture-Struct
+      - nx8rz:
+          requires:
+            - Primary-Fixture-Struct
+      - Batch2021:
+          requires:
+            - nx8rz
+      - py310-lint:
+          requires:
+            - Batch2021
+      - cost5:
+          requires:
+            - Batch2021
+      - FLAG_LOWER:
+          requires:
+            - cost5
+      - alpha-v7:
+          requires:
+            - FLAG_LOWER
+      - mini_camera:
+          requires:
+            - FLAG_LOWER
+      - comment_list_file:
+          requires:
+            - mini_camera
+      - do-the-thing:
+          requires:
+            - comment_list_file
+      - cos_independant
+      - November
+      - d:
+          requires:
+            - cos_independant
+            - November
+      - hotel:
+          requires:
+            - cos_independant
+            - November
+      - VERIFY_LAB:
+          requires:
+            - cos_independant
+            - November
+      - zulu-7:
+          requires:
+            - cos_independant
+            - November
+      - q4-cleanup:
+          requires:
+            - cos_independant
+            - November
+      - juliet-1:
+          requires:
+            - cos_independant
+            - November
+      - validate-partial-artifact-bundle:
+          requires:
+            - cos_independant
+            - November
+      - ship-it:
+          requires:
+            - cos_independant
+            - November
+      - sanitize_mut
+      - INFRA-756:
+          requires:
+            - sanitize_mut
+      - Coupon_008944:
+          requires:
+            - sanitize_mut
+      - Ship_Suite4:
+          requires:
+            - Coupon_008944
+      - addressKwhMax:
+          requires:
+            - Coupon_008944
+      - CHECK_DEV:
+          requires:
+            - addressKwhMax
+      - UXCW-2832-warning:
+          requires:
+            - addressKwhMax
+      - kilo-7:
+          requires:
+            - UXCW-2832-warning
+      - metric_spec:
+          requires:
+            - UXCW-2832-warning
+      - bake-it:
+          requires:
+            - metric_spec
+      - teardown_cont:
+          requires:
+            - metric_spec
+      - lets-go:
+          requires:
+            - teardown_cont
+      - varCb
+      - hmm_y:
+          requires:
+            - varCb
+      - d-2:
+          requires:
+            - hmm_y
+      - trackUrl:
+          requires:
+            - hmm_y
+      - lang-mn:
+          requires:
+            - trackUrl
+      - jan26-rev:
+          requires:
+            - lang-mn
+      - bool_str:
+          requires:
+            - lang-mn
+      - cdn-us-b:
+          requires:
+            - bool_str
+      - artifacts:
+          requires:
+            - cdn-us-b
+      - save_writer_height:
+          requires:
+            - cdn-us-b
+      - GANWrapper:
+          requires:
+            - save_writer_height
+      - p-2:
+          requires:
+            - GANWrapper
+      - ugdf53al5j2iq961:
+          requires:
+            - GANWrapper
+      - n_len:
+          requires:
+            - ugdf53al5j2iq961
+      - refactor-8612:
+          requires:
+            - n_len
+      - noodleish:
+          requires:
+            - n_len
+      - sidebar251rad:
+          requires:
+            - noodleish
+      - vb-x:
+          requires:
+            - sidebar251rad
+      - clusters2
+      - npost:
+          requires:
+            - clusters2
+      - DATA-770:
+          requires:
+            - npost
+      - unmountResultLightError:
+          requires:
+            - npost
+      - namespaceStr:
+          requires:
+            - unmountResultLightError
+      - validte:
+          requires:
+            - namespaceStr
+      - gridCnt:
+          requires:
+            - namespaceStr
+      - hank99:
+          requires:
+            - gridCnt
+      - refactor-5273:
+          requires:
+            - hank99
